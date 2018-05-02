@@ -16,6 +16,7 @@
 ## Источники
 
 [Refactoring: Абстрактная фабрика](https://refactoring.guru/ru/design-patterns/abstract-factory)
+
 [CPP reference: Классный пример с войнами, хочу такой же сделать](http://cpp-reference.ru/patterns/creational-patterns/abstract-factory/)
 
 ![](https://github.com/obscene3190/PATTERNS/blob/master/sources/AbstractFabric.png)
