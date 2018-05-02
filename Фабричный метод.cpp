@@ -1,43 +1,36 @@
-include iostream;
+#include <iostream>
 using namespace std;
 
 class Transport {
 public:
-  virtual void config() {
+  virtual void info() {
     int seats;
     int weight;
-  }
-  virtual void info();
+    }
 };
 
 class Car:public Transport {
 public:
-  void config() {
-    int wheels;
-    
-  }
   void info() {
-    cout<<"Car with "<<wheels<<"wheels"<<endl;
+    int wheels;
+    cout<<"Car with "<<wheels<<" wheels"<<endl;
   }
 };
 
 class Boat:public Transport {
 public:
-  void config() {
-    int paddles;
-  }
   void info() {
+    int paddles;  
     cout<<"Boat with "<<paddles<<" paddles"<<endl;
   }
 };
 
-class Plain:public Transport {
+class Plane:public Transport {
 public:
-  void config() {
-    int propellers;
-  }
+
   void info() {
-    cout<<"Plain with "<<propellers<<"propellers"<<endl;
+    int propellers;
+    cout<<"Plane with "<<propellers<<" propellers"<<endl;
   }
 };
 
@@ -49,22 +42,32 @@ public:
 
 class CarFactory:public Factory {
 public:
-  Transport* create(){
+  Transport* create() {
         return new Car;
+  }
 };
   
 class BoatFactory:public Factory {
 public:
-  Transport* create(){
+  Transport* create() {
         return new Boat;
+  }
 };
   
 class PlaneFactory:public Factory {
 public:
-  Transport* create(){
+  Transport* create() {
         return new Plane;
+  }
 };
   
-Transport* Assembling(Factory *value){
+Transport* Assembling(Factory *value) {
     return value->create(); 
+}
+
+int main(){
+    CarFactory car1;
+    Factory *factory = &car1;
+    Transport *transport1 = Assembling(factory);
+    transport1->info();
 }
