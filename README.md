@@ -15,6 +15,6 @@
 
 ## Источники
 
-Refactoring: Абстрактная фабрика](https://refactoring.guru/ru/design-patterns/abstract-factory)
+[Refactoring: Абстрактная фабрика](https://refactoring.guru/ru/design-patterns/abstract-factory)
 
 ![](https://github.com/obscene3190/PATTERNS/blob/master/sources/AbstractFabric.png)
