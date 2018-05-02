@@ -3,71 +3,82 @@ using namespace std;
 
 class Transport {
 public:
-  virtual void info() {
     int seats;
     int weight;
-    }
+    virtual void info() = 0;
 };
 
 class Car:public Transport {
 public:
-  void info() {
-    int wheels;
-    cout<<"Car with "<<wheels<<" wheels"<<endl;
-  }
+    int wheels = 4;
+
+    void info() {
+        cout<<"Car with "<<wheels<<" wheels"<<endl;
+
+    }
 };
 
 class Boat:public Transport {
 public:
-  void info() {
-    int paddles;  
-    cout<<"Boat with "<<paddles<<" paddles"<<endl;
-  }
+    int paddles = 2;
+
+    void info() {
+        cout<<"Boat with "<<paddles<<" paddles"<<endl;
+    }
 };
 
 class Plane:public Transport {
 public:
+    int propellers = 2;
 
-  void info() {
-    int propellers;
-    cout<<"Plane with "<<propellers<<" propellers"<<endl;
-  }
+    void info() {
+        cout<<"Plane with "<<propellers<<" propellers"<<endl;
+
+    }
 };
 
 class Factory{
 public:
-    virtual Transport* create() = 0; //Чистая виртуальная функция показывает, что в производстве будет метод Create
-    virtual ~Factory(){}  //Виртуальный деструктор
+    virtual Transport* create() = 0;
+    virtual ~Factory(){}
 };
 
 class CarFactory:public Factory {
 public:
-  Transport* create() {
+    Transport* create() {
         return new Car;
-  }
+    }
 };
-  
+
 class BoatFactory:public Factory {
 public:
-  Transport* create() {
+    Transport* create() {
         return new Boat;
-  }
+    }
 };
-  
+
 class PlaneFactory:public Factory {
 public:
-  Transport* create() {
+    Transport* create() {
         return new Plane;
-  }
+    }
 };
-  
+
 Transport* Assembling(Factory *value) {
-    return value->create(); 
+    return value->create();
 }
 
 int main(){
-    CarFactory car1;
-    Factory *factory = &car1;
-    Transport *transport1 = Assembling(factory);
+    CarFactory car;
+    Factory *factory1 = &car;
+    Transport *transport1 = Assembling(factory1);
     transport1->info();
+    BoatFactory boat;
+    Factory *factory2 = &boat;
+    Transport *transport2 = Assembling(factory2);
+    transport2->info();
+    PlaneFactory plane;
+    Factory *factory3 = &plane;
+    Transport *transport3 = Assembling(factory3);
+    transport3->info();
 }
