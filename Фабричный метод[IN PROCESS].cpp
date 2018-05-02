@@ -83,6 +83,8 @@ int main(){
     Factory *factory1 = &car;//Создаем указатели на объекты нужных типов
     Transport *transport1 = Assembling(factory1);//Создаем новый траспорт и собираем его на фабрике
     transport1->info();//Смотрим,что за объект мы собрали
+    //ВЫВОД: Car with 4 wheels
+    
     //Далее для каждого подкласса
     
     
@@ -90,10 +92,12 @@ int main(){
     Factory *factory2 = &boat;
     Transport *transport2 = Assembling(factory2);
     transport2->info();
+    //ВЫВОД: Boat with 2 paddles
     
     
     PlaneFactory plane;
     Factory *factory3 = &plane;
     Transport *transport3 = Assembling(factory3);
     transport3->info();
+    //ВЫВОД: Plane with 2 propellers
 }
