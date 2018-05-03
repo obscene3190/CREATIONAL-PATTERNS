@@ -1,0 +1,135 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Абстрактные базовые классы всех возможных видов воинов
+class Soldier
+{
+  public:
+    virtual void info() = 0;     
+    virtual ~Soldier() {}
+};
+  
+class Sniper
+{
+  public:
+    virtual void info() = 0;
+    virtual ~Sniper() {}
+};
+
+// Классы всех видов 1 семейства(Канада)
+class CanadaSoldier: public Soldier
+{
+  public:
+    void info() { 
+      cout << "CanadaSoldier" << endl; 
+    }
+};
+  
+class CanadaSniper: public Sniper
+{
+  public:
+    void info() { 
+      cout << "CanadaSniper" << endl; 
+    }
+};   
+  
+// Классы всех видов 2 семейства(США)
+class USASoldier: public Soldier
+{
+  public:
+    void info() { 
+      cout << "USASoldier" << endl; 
+    }
+};
+  
+class USASniper: public Sniper
+{
+  public:
+    void info() { 
+      cout << "USASniper" << endl; 
+    }
+};   
+  
+  
+// Абстрактная фабрика для производства
+class ArmyFactory
+{
+  public:    
+    virtual Soldier* createSoldier() = 0;
+    virtual Sniper* createSniper() = 0;
+    virtual ~ArmyFactory() {}
+};
+  
+  
+// Фабрика для создания воинов 1 семейства(Канада)
+class CanadaArmyFactory: public ArmyFactory
+{
+  public:    
+    Soldier* createSoldier() { 
+      return new CanadaSoldier; 
+    }
+    Sniper* createSniper() { 
+      return new CanadaSniper; 
+    }
+};
+  
+  
+// Фабрика для создания воинов 2 семейства(США)
+class USAArmyFactory: public ArmyFactory
+{
+  public:    
+    Soldier* createSoldier() { 
+      return new USASoldier; 
+    }
+    Sniper* createSniper() { 
+      return new USASniper; 
+    }
+};
+  
+  
+// Класс, содержащий всех воинов той или иной армии
+class Army 
+{
+  public:    
+   ~Army() {
+      unsigned int i;
+      for(i=0; i<soldiers.size(); ++i) delete soldiers[i]; 
+      for(i=0; i<snipers.size(); ++i) delete snipers[i]; 
+    }
+    void info() {   
+      unsigned int i;
+      for(i = 0; i<soldiers.size(); ++i) soldiers[i]->info(); 
+      for(i = 0; i<snipers.size(); ++i) snipers[i]->info();
+    }   
+    vector<Soldier*> soldiers; 
+    vector<Sniper*> snipers;   
+};
+  
+  
+// Здесь создается армия той или иной стороны
+class Game
+{
+  public:    
+    Army* createArmy( ArmyFactory& factory ) {   
+      Army* p = new Army;
+      p->soldiers.push_back( factory.createSoldier());
+      p->snipers.push_back( factory.createSniper());
+      return p;
+    }   
+};
+  
+  
+int main()
+{        
+    Game game;
+    CanadaArmyFactory ca_factory;
+    USAArmyFactory usa_factory;
+     
+    Army * ca = game.createArmy( ca_factory);
+    Army * usa = game.createArmy( usa_factory);
+    cout << "Canada army:" << endl;
+    ca->info();
+    cout << "\nUSA army:" << endl;
+    usa->info();
+}
