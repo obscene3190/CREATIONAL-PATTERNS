@@ -21,6 +21,14 @@
 
 ![](https://github.com/obscene3190/PATTERNS/blob/master/sources/AbstractFabric.png)
 
+# Строитель
+
+## Источники
+
+[Refactoring: Строитель](https://refactoring.guru/ru/design-patterns/builder)
+
+![](https://github.com/obscene3190/CREATIONAL-PATTERNS/blob/master/sources/builder.png)
+
 
 # TODO
 ## Порождающие
@@ -36,7 +44,7 @@
 
 Строитель
 - [x] теория
-- [ ] пример
+- [x] пример
 - [ ] защита
 
 Прототип
