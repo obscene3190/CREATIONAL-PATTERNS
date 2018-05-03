@@ -8,6 +8,8 @@ public:
 };
 
 class Builder : public Pizza {
+public:
+    Pizza * pizza = new Pizza();
     virtual void addcheese() = 0;
     virtual void addpepperoni() = 0;
     virtual void addketchup() = 0;
@@ -15,17 +17,21 @@ class Builder : public Pizza {
     virtual void addtomato() = 0;
     virtual void addgreen() = 0;
     virtual void addclosed()= 0;
+    virtual Pizza* getPizza() {
+        return pizza;
+    }
     virtual void info() = 0;
 };
 
 class PepperoniBuilder : public Builder {
-    virtual void addcheese() {
+public:
+    void addcheese() {
         cheese = true;
     }
-    virtual void addpepperoni() {
+    void addpepperoni() {
         pepperoni = true;
     }
-    virtual void addketchup() {
+    void addketchup() {
         ketchup = true;
     }
     void info() {
@@ -34,19 +40,20 @@ class PepperoniBuilder : public Builder {
 };
 
 class CalzoneBuilder : public Builder {
-    virtual void addcheese() {
+public:    
+    void addcheese() {
         cheese = true;
     }
-    virtual void addketchup() {
+    void addketchup() {
         ketchup = true;
     }
-    virtual void addpotato() {
+    void addpotato() {
         potato = true;
     }
-    virtual void addtomato() {
+    void addtomato() {
         tomato = true;
     }
-    virtual void addclosed() {
+    void addclosed() {
          closed = true;
     }
     void info() {
@@ -55,16 +62,37 @@ class CalzoneBuilder : public Builder {
 };
 
 class FourCheesesBuilder : public Builder {
-    virtual void addcheese() {
+public:
+    void addcheese() {
         cheese = true;
     }
-    virtual void addketchup() {
+    void addketchup() {
         ketchup = true;
     }
-    virtual void addgreen() {
+    void addgreen() {
         green = true;
     }
     void info() {
         cout<<"FourCheeses with cheese, green and ketchup"<<endl;
     }
 };
+
+class Cook {
+public:
+    Pizza * makepizza(Builder &builder) {
+        builder.addcheese();
+        builder.addpepperoni();
+        builder.addketchup();
+        builder.addpotato();
+        builder.addtomato();
+        builder.addgreen();
+        builder.addclosed();
+        return(builder.getPizza());
+    }
+};
+
+int main() {
+    Cook povar;
+    PepperoniBuilder pepperoni;
+    Pizza *pizza1 = povar.makepizza(pepperoni);
+}
