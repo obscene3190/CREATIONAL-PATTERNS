@@ -4,12 +4,24 @@ using namespace std;
 
 class Pizza {
 public:
-    bool cheese = false, pepperoni = false, ketchup = false, potato = false, tomato = false, green = false, closed = false;
+    bool cheese, pepperoni, ketchup, potato, tomato, green, closed;
+    void info() {
+        if (cheese) cout<<"cheese"<<endl;
+        else cout<<cheese<<endl;
+        if (pepperoni) cout<<"pepperoni"<<endl;
+        if (ketchup) cout<<"ketchup"<<endl;
+        if (potato) cout<<"potato"<<endl;
+        if (tomato) cout<<"tomato"<<endl;
+        if (green) cout<<"green"<<endl;
+        if (closed) cout<<"closed"<<endl;
+    }
 };
 
-class Builder : public Pizza {
+class Builder {
+protected:
+    Pizza * pizza;
 public:
-    Pizza * pizza = new Pizza();
+    virtual void create() = 0;
     virtual void addcheese() = 0;
     virtual void addpepperoni() = 0;
     virtual void addketchup() = 0;
@@ -20,66 +32,90 @@ public:
     virtual Pizza* getPizza() {
         return pizza;
     }
-    virtual void info() = 0;
 };
 
 class PepperoniBuilder : public Builder {
 public:
+    void create() { pizza = new Pizza(); }
     void addcheese() {
-        cheese = true;
+        pizza->cheese = true;
     }
     void addpepperoni() {
-        pepperoni = true;
+        pizza->pepperoni = true;
     }
     void addketchup() {
-        ketchup = true;
+        pizza->ketchup = true;
     }
-    void info() {
-        cout<<"Pepperoni with cheese, pepperoni and ketchup"<<endl;
+     void addpotato() {
+        pizza->potato = false;
+    }
+    void addtomato() {
+        pizza->tomato = false;
+    }
+    void addgreen() {
+        pizza->green = false;
+    }
+    void addclosed() {
+        pizza->closed = false;
     }
 };
 
 class CalzoneBuilder : public Builder {
 public:    
+    void create() { pizza = new Pizza(); }
     void addcheese() {
-        cheese = true;
+        pizza->cheese = true;
+    }
+    void addpepperoni() {
+        pizza->pepperoni = false;
     }
     void addketchup() {
-        ketchup = true;
+        pizza->ketchup = true;
     }
     void addpotato() {
-        potato = true;
+        pizza->potato = true;
     }
     void addtomato() {
-        tomato = true;
+        pizza->tomato = true;
+    }
+     void addgreen() {
+        pizza->green = false;
     }
     void addclosed() {
-         closed = true;
-    }
-    void info() {
-        cout<<"Calzone with cheese, potato, tomato  and ketchup"<<endl;
+        pizza->closed = true;
     }
 };
 
 class FourCheesesBuilder : public Builder {
 public:
-    void addcheese() {
-        cheese = true;
+   void create() { pizza = new Pizza(); }
+   void addcheese() {
+        pizza->cheese = true;
+    }
+    void addpepperoni() {
+        pizza->pepperoni = false;
     }
     void addketchup() {
-        ketchup = true;
+        pizza->ketchup = true;
     }
-    void addgreen() {
-        green = true;
+    void addpotato() {
+        pizza->potato = false;
     }
-    void info() {
-        cout<<"FourCheeses with cheese, green and ketchup"<<endl;
+    void addtomato() {
+        pizza->tomato = false;
+    }
+     void addgreen() {
+        pizza->green = false;
+    }
+    void addclosed() {
+        pizza->closed = true;
     }
 };
 
 class Cook {
 public:
     Pizza * makepizza(Builder &builder) {
+        builder.create();
         builder.addcheese();
         builder.addpepperoni();
         builder.addketchup();
@@ -95,4 +131,6 @@ int main() {
     Cook povar;
     PepperoniBuilder pepperoni;
     Pizza *pizza1 = povar.makepizza(pepperoni);
+    cout<<"We made pepperoni, which is: "<<endl;
+    pizza1->info();
 }
