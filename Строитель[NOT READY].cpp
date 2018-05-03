@@ -7,7 +7,6 @@ public:
     bool cheese, pepperoni, ketchup, potato, tomato, green, closed;
     void info() {
         if (cheese) cout<<"cheese"<<endl;
-        else cout<<cheese<<endl;
         if (pepperoni) cout<<"pepperoni"<<endl;
         if (ketchup) cout<<"ketchup"<<endl;
         if (potato) cout<<"potato"<<endl;
@@ -125,12 +124,32 @@ public:
         builder.addclosed();
         return(builder.getPizza());
     }
+    void cookend() {
+        cout<<endl<<"Bon appetite"<<endl<<endl;
+    }
 };
 
 int main() {
     Cook povar;
+    
+    
     PepperoniBuilder pepperoni;
     Pizza *pizza1 = povar.makepizza(pepperoni);
     cout<<"We made pepperoni, which is: "<<endl;
     pizza1->info();
+    povar.cookend();
+    
+    
+    CalzoneBuilder calzone;
+    Pizza *pizza2 = povar.makepizza(calzone);
+    cout<<"We made calzone, which is: "<<endl;
+    pizza2->info();
+    povar.cookend();
+    
+    
+    FourCheesesBuilder cheese4;
+    Pizza *pizza3 = povar.makepizza(cheese4);
+    cout<<"We made Four Cheeses, which is: "<<endl;
+    pizza3->info();
+    povar.cookend();
 }
