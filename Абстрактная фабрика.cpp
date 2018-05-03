@@ -1,8 +1,13 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+//Пример на основе примера из cpp-reference
 
-// Абстрактные базовые классы всех возможных видов воинов
+//Абстрактная фабрика: позволяет создавать семейства связанных объектов, не привязываясь к конкретным классам создаваемых объектов
+//Задача: создать классы армий разных стран, при условии, что войны одной страны не могут быть в армии другой страны
+
+// Сначала создаем абстрактные базовые классы всех возможных видов воинов, в данном примере будут Солдат и Снайпер
+//Естественно, в зависимости от армии, можно добавить еще какие-то классы войнов
 class Soldier
 {
   public:
@@ -17,7 +22,8 @@ class Sniper
     virtual ~Sniper() {}
 };
 
-// Классы всех видов 1 семейства(Канада)
+// Теперь создаем классы всех видов армии, например, Канады и США, соответственно имеющие свои особенности, но
+//т.к. это по прежнему войны, то они наследуют базовый класс. Для различия добавим им выводы их "должностей".
 class CanadaSoldier: public Soldier
 {
   public:
@@ -52,7 +58,7 @@ class USASniper: public Sniper
 };   
   
   
-// Абстрактная фабрика для производства
+// Абстрактная фабрика для производства войнов, можем создавать Солдата и Снайпера
 class ArmyFactory
 {
   public:    
@@ -62,7 +68,7 @@ class ArmyFactory
 };
   
   
-// Фабрика для создания воинов 1 семейства(Канада)
+// Фабрика для создания воинов 1 семейства(Канада) ,создающая войнов из Канады
 class CanadaArmyFactory: public ArmyFactory
 {
   public:    
@@ -75,7 +81,7 @@ class CanadaArmyFactory: public ArmyFactory
 };
   
   
-// Фабрика для создания воинов 2 семейства(США)
+// Фабрика для создания воинов 2 семейства(США), создающая войнов из США
 class USAArmyFactory: public ArmyFactory
 {
   public:    
@@ -88,22 +94,22 @@ class USAArmyFactory: public ArmyFactory
 };
   
   
-// Класс, содержащий всех воинов той или иной армии
+// Класс, отражающий строение армии
 class Army 
 {
-  public:    
-   ~Army() {
-      unsigned int i;
-      for(i=0; i<soldiers.size(); ++i) delete soldiers[i]; 
-      for(i=0; i<snipers.size(); ++i) delete snipers[i]; 
-    }
+  public:
+    vector<Soldier*> soldiers; //отряд солдат
+    vector<Sniper*> snipers; //отряд снайперов
     void info() {   
       unsigned int i;
       for(i = 0; i<soldiers.size(); ++i) soldiers[i]->info(); 
       for(i = 0; i<snipers.size(); ++i) snipers[i]->info();
+    }
+    ~Army() {
+      unsigned int i;
+      for(i=0; i<soldiers.size(); ++i) delete soldiers[i]; 
+      for(i=0; i<snipers.size(); ++i) delete snipers[i]; 
     }   
-    vector<Soldier*> soldiers; 
-    vector<Sniper*> snipers;   
 };
   
   
@@ -133,3 +139,12 @@ int main()
     cout << "\nUSA army:" << endl;
     usa->info();
 }
+
+//ВЫВОД
+//Canada army:
+//CanadaSoldier
+//CanadaSniper
+
+//USA army:
+//USASoldier
+//USASniper
