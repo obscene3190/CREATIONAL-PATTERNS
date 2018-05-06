@@ -11,6 +11,7 @@ public:
     int X;
     int Y;
     string color;
+    Shape() {}
     Shape(Shape const & other) {
         X = other.X;
         Y = other.Y;
@@ -26,6 +27,7 @@ public:
 
 // Конкретные прототипы
 class Rectangle : Shape {
+public:
     int height;
     int weight;
     Rectangle(Rectangle const & other) : Shape(other) {
@@ -41,7 +43,9 @@ class Rectangle : Shape {
 };
 
 class Circle : public Shape {
+public:    
     int radius;
+    Circle() : Shape() {};
     Circle(Circle const & other) : Shape(other) {
         radius = other.radius;
     }
@@ -51,4 +55,16 @@ class Circle : public Shape {
     void info() {
         cout<<"Circle"<<endl;
     }
+    void showinfo(Shape * s) {
+        s->info();
+    }
 };
+int main() {
+     Circle * circle = new Circle();
+     circle->X = 10;
+     circle->Y = 20;
+     circle->radius = 15;
+     Circle * anotherCircle = circle->clone();
+}
+//Например, у нас будет массив с элементами класса Shape, тогда нам будет все равно, добавить туда треугольник
+//или квадрат или любой другой конкретный прототип
