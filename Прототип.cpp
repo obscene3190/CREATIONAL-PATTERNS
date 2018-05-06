@@ -19,9 +19,6 @@ public:
     }
     virtual Shape* clone() = 0;
     virtual void info() = 0;
-    /*static Shape * CreateShape(){
-        
-    } */
     
 };
 
@@ -55,6 +52,10 @@ public:
     void info() {
         cout<<"Circle"<<endl;
     }
+    Shape * createS() {
+        static Circle prototype;
+        return prototype.clone();
+    }
     void showinfo(Shape * s) {
         s->info();
     }
@@ -64,7 +65,8 @@ int main() {
      circle->X = 10;
      circle->Y = 20;
      circle->radius = 15;
-     Circle * anotherCircle = circle->clone();
+     circle->info();
+     Circle * anotherCircle = circle->createS();
 }
 //Например, у нас будет массив с элементами класса Shape, тогда нам будет все равно, добавить туда треугольник
 //или квадрат или любой другой конкретный прототип
