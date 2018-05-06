@@ -19,7 +19,9 @@ public:
     }
     virtual Shape* clone() = 0;
     virtual void info() = 0;
-    
+    void showinfo(Shape * s) {
+        s->info();
+    }
 };
 
 // Конкретные прототипы
@@ -56,9 +58,7 @@ public:
         static Circle prototype;
         return prototype.clone();
     }
-    void showinfo(Shape * s) {
-        s->info();
-    }
+
 };
 int main() {
      Circle * circle = new Circle();
