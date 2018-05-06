@@ -2,7 +2,10 @@
 #include <string>
 using namespace std;
 
+//Прототип позволяет(как и фабрика) абстрагироваться от привязки нашего кода к конкретным классам
+//Вместо этого создаем класс прототип, который используется для создания новых классов путем специальной команды клонирования
 
+//класс прототип
 class Shape {
 public:
     int X;
@@ -38,6 +41,10 @@ class Rectangle : Shape {
 };
 
 class Circle : public Shape {
+    int radius;
+    Circle(Circle const & other) : Shape(other) {
+        radius = other.radius;
+    }
     Shape* clone() {
         return new Circle(*this);
     }
@@ -45,4 +52,3 @@ class Circle : public Shape {
         cout<<"Circle"<<endl;
     }
 };
-
