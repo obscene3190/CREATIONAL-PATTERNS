@@ -29,6 +29,17 @@
 
 ![](https://github.com/obscene3190/CREATIONAL-PATTERNS/blob/master/sources/builder.png)
 
+# Прототип
+
+## Источники
+
+[Refactoring: Прототип](https://refactoring.guru/ru/design-patterns/prototype)
+
+[Cpp reference](http://cpp-reference.ru/patterns/creational-patterns/prototype/)
+
+[Какой-то левый сайт](https://pro-prof.com/archives/1141)
+
+![](https://github.com/obscene3190/CREATIONAL-PATTERNS/blob/master/sources/prototype.png)
 
 # TODO
 ## Порождающие
@@ -49,7 +60,7 @@
 
 Прототип
 - [x] теория
-- [ ] пример
+- [x] пример слабенько
 - [ ] защита
 
 Одиночка
