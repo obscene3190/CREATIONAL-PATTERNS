@@ -48,17 +48,12 @@ public:
     Circle(Circle const & other) : Shape(other) {
         radius = other.radius;
     }
-    Shape* clone() {
+    Circle* clone() {
         return new Circle(*this);
     }
     void info() {
         cout<<"Circle"<<endl;
     }
-    Shape * createS() {
-        static Circle prototype;
-        return prototype.clone();
-    }
-
 };
 int main() {
      Circle * circle = new Circle();
@@ -66,7 +61,9 @@ int main() {
      circle->Y = 20;
      circle->radius = 15;
      circle->info();
-     Circle * anotherCircle = circle->createS();
+     Circle * anotherCircle = circle->clone();
+     anotherCircle->info();
+     
 }
 //Например, у нас будет массив с элементами класса Shape, тогда нам будет все равно, добавить туда треугольник
 //или квадрат или любой другой конкретный прототип
