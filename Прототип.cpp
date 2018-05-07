@@ -25,7 +25,7 @@ public:
 };
 
 // Конкретные прототипы
-class Rectangle : Shape {
+class Rectangle : public Shape {
 public:
     int height;
     int weight;
@@ -33,7 +33,7 @@ public:
         height = other.height;
         weight = other.weight;
     }
-    Shape* clone() { 
+    Shape* clone() override { 
         return new Rectangle(*this);
     }
     void info() {
@@ -44,11 +44,11 @@ public:
 class Circle : public Shape {
 public:    
     int radius;
-    Circle() : Shape() {};
-    Circle(Circle const & other) : Shape(other) {
-        radius = other.radius;
-    }
-    Circle* clone() {
+    //Circle() : Shape() {};
+    //Circle(Circle const & other) : Shape(other) {
+        //radius = other.radius;
+    //}
+    Shape* clone() override {
         return new Circle(*this);
     }
     void info() {
