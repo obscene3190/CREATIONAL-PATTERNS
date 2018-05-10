@@ -1,4 +1,7 @@
 
+//Паттерн необходим для содержания только одного объекта нашего класса, 
+//при этом делая конструкторы недоступными для пользователя
+
 //Классическая реализация
 //Недостаток: придется вручную удалять наш объект
 class Singleton1
@@ -35,8 +38,6 @@ public:
 
 //Улучшенная реализация
 //Добавлен специальный метод для автоматического удаления
-//
-//
 class Singleton;
   
 class SingletonDestroyer
@@ -45,10 +46,10 @@ class SingletonDestroyer
     Singleton* p_instance; //это переменная, которая будет удаляться и в которую будет перезаписываться наша
   public:    
     ~SingletonDestroyer(); //удаляет переменную
-    void initialize( Singleton* p );//переписывает аргумент в наш объект
+    void initialize( Singleton* p );//переписывает переменные, чтобы удалить нашу
 };
   
-class Singleton
+class SingletonD
 {
   private:
     static Singleton* p_instance;
@@ -62,23 +63,18 @@ class Singleton
   public:
     static Singleton& getInstance();
 };
-  
-// Singleton.cpp
-#include "Singleton.h"
-  
-Singleton * Singleton::p_instance = 0;
-SingletonDestroyer Singleton::destroyer;
-  
+    
 SingletonDestroyer::~SingletonDestroyer() {   
     delete p_instance; 
 }
 void SingletonDestroyer::initialize( Singleton* p ) {
-    p_instance = p; 
+    p_instance = p; //переписывается адрес, по которому будет удаляться данные
 }
 Singleton& Singleton::getInstance() {
     if(!p_instance)     {
         p_instance = new Singleton();
-        destroyer.initialize( p_instance);     
+        destroyer.initialize( p_instance);  //при создании объекта будет инициализироваться дестроер, таким образом делая 
+        //автоматическим удаление нашего объекта после завершения программы    
     }
     return *p_instance;
 }
