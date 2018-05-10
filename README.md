@@ -46,6 +46,7 @@
 ## Источники
 
 [Refactoring: Одиночка](https://refactoring.guru/ru/design-patterns/singleton)
+[CPP Reference](http://cpp-reference.ru/patterns/creational-patterns/singleton/)
 
 ![](https://github.com/obscene3190/CREATIONAL-PATTERNS/blob/master/sources/one.png)
 
