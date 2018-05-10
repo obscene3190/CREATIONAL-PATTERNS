@@ -41,6 +41,15 @@
 
 ![](https://github.com/obscene3190/CREATIONAL-PATTERNS/blob/master/sources/prototype.png)
 
+# Одиночка
+
+## Источники
+
+[Refactoring: Одиночка](https://refactoring.guru/ru/design-patterns/singleton)
+
+![](https://github.com/obscene3190/CREATIONAL-PATTERNS/blob/master/sources/one.png)
+
+
 # TODO
 ## Порождающие
 Фабричный метод
@@ -61,9 +70,9 @@
 Прототип
 - [x] теория
 - [x] пример слабенько
-- [ ] защита
+- [x] защита
 
 Одиночка
-- [ ] теория
-- [ ] пример
+- [x] теория
+- [x] пример
 - [ ] защита
