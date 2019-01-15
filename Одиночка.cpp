@@ -49,7 +49,7 @@ class SingletonDestroyer
     void initialize( Singleton* p );//переписывает переменные, чтобы удалить нашу
 };
   
-class SingletonD
+class Singleton
 {
   private:
     static Singleton* p_instance;
